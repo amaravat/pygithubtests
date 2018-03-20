@@ -2,7 +2,7 @@ from github import Github
 from github import GithubException
 import sys, argparse
   
-g = Github("8ab4863dda11df8cb8eb5b2e06acf1ad98d60019")
+g = Github("your token")
 user_login = ''
 email_id = ''
 
