@@ -5,7 +5,7 @@ from github import Github
 from github import GithubException
 import os, sys, argparse
   
-g = Github("070d5a8d9d773272e3349c21c06b1249befd4524")
+g = Github("your token")
 user_login = ''
 email_id = ''
 
@@ -85,7 +85,7 @@ def remove_user(username):
       print(e3)
 
 def user_list():
-  org = g.get_organization("sasiorg")
+  org = g.get_organization("your org")
   with open("gitautomate.txt","a") as fil:
     try:
       fil.write("Existing Member list\n")
