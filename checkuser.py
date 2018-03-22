@@ -1,3 +1,10 @@
+rom github import Github
+from github import GithubException
+import sys, argparse
+
+g = Github("")
+user_login = ''
+email_id = ''
 from github import Github
 from github import GithubException
 import sys, argparse
