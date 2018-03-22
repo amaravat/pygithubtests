@@ -1,15 +1,8 @@
-rom github import Github
-from github import GithubException
-import sys, argparse
-
-g = Github("")
-user_login = ''
-email_id = ''
 from github import Github
 from github import GithubException
 import sys, argparse
   
-g = Github("4cb509759f0645befc04223b1ca0c6b38de6c6d6")
+g = Github("your token")
 user_login = ''
 email_id = ''
 
@@ -45,11 +38,11 @@ def invite_user(username):
   try:
     u_name = g.get_user(login=username)
     user_login_found = u_name.login
-    org = g.get_organization( "sasiorg" )
+    org = g.get_organization( "your org" )
     teams = org.get_teams()
     #team = [t for t in teams if t.name == 'all'][0]
     for t in teams:
-      if t.name == "all":
+      if t.name == "your team":
         print(t.name)
         print "public members of", org.login, ":"
         for member in org.get_public_members():
@@ -78,7 +71,7 @@ def remove_user(username):
   try:
     u_name = g.get_user(login=username)
     user_login_found = u_name.login
-    org = g.get_organization( "sasiorg" )
+    org = g.get_organization( "your org" )
     remove_member = org.remove_from_members(u_name)
     print("user removed from org", user_login_found)
     print(remove_member)
@@ -89,7 +82,7 @@ def remove_user(username):
       print(e3)
 
 def user_list():
-  org = g.get_organization( "sasiorg" )
+  org = g.get_organization( "your org" )
   try:
     print([m.login for m in org.get_members(role="members")])
   except GithubException as e4:
