@@ -5,7 +5,7 @@ from github import Github
 from github import GithubException
 import os, sys, argparse
   
-g = Github("your token")
+g = Github("070d5a8d9d773272e3349c21c06b1249befd4524")
 user_login = ''
 email_id = ''
 
@@ -85,12 +85,12 @@ def remove_user(username):
       print(e3)
 
 def user_list():
-  org = g.get_organization("your org")
+  org = g.get_organization("sasiorg")
   with open("gitautomate.txt","a") as fil:
     try:
       fil.write("Existing Member list\n")
       for m in org.get_members(role="members"):
-        fil.write(m.login+"\n") 
+        fil.write("User-id is :" + m.login + "\t" + "Profile_name is :" +  m.name + "\n") 
     except GithubException as e4:
       if (e4.status == 404 ):
         print("error")
@@ -98,8 +98,10 @@ def user_list():
         print(e4)
     fil.write("Organization Repository list\n")
     for repos in org.get_repos(): 
-      fil.write(repos.name+ "\n") 
+      fil.write("Repository_Name:" + repos.name + "\n") 
   fil.close()
+
+
 
 if __name__ == '__main__':
     check_arg(sys.argv[1:])
