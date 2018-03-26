@@ -5,7 +5,7 @@ from github import Github
 from github import GithubException
 import os, sys, argparse
   
-g = Github("your token")
+g = Github("Your token")
 user_login = ''
 email_id = ''
 
@@ -85,21 +85,30 @@ def remove_user(username):
       print(e3)
 
 def user_list():
-  org = g.get_organization("your org")
-  with open("gitautomate.txt","a") as fil:
-    try:
-      fil.write("Existing Member list\n")
-      for m in org.get_members(role="members"):
-        fil.write("User-id is :" + m.login + "\t" + "Profile_name is :" +  m.name + "\n") 
-    except GithubException as e4:
-      if (e4.status == 404 ):
-        print("error")
+  try:
+    org = g.get_organization("your org")
+    with open("gitautomate.txt","a") as fil:
+      try:
+        fil.write("Existing Member list\n")
+        for m in org.get_members(role="members"):
+          if m.name is None:
+            fil.write("User-id is :" + m.login + "\t" + "Profile_name is : None \n")
+          else:
+            fil.write("User-id is :" + m.login + "\t" + "Profile_name is :" +  m.name + "\n") 
+      except GithubException as e4:
+        if (e4.status == 404 ):
+          print("error")
+        else:
+          print(e4)
+      fil.write("Organization Repository list\n")
+      for repos in org.get_repos(): 
+        fil.write("Repository_Name:" + repos.name + "\n") 
+    fil.close()
+    except GithubException as e5:
+      if (e5.status == 404):
+        print("Organization name not found. \n")
       else:
-        print(e4)
-    fil.write("Organization Repository list\n")
-    for repos in org.get_repos(): 
-      fil.write("Repository_Name:" + repos.name + "\n") 
-  fil.close()
+        print(e5)
 
 
 
